@@ -72,8 +72,11 @@ To clean up all AWS resources created by this project, follow these steps:
 ### File added to S3 bucket
 ![S3 Bucket](screenshots/s3.png)
 
-### Dyanamodb records
-![Dyanamodb](screenshots/dyanamodb.png)
+### Dyanamodb record before file processing
+![Dyanamodb](screenshots/db-record-before-processing.png)
+
+### Dyanamodb record after file processing
+![Dyanamodb](screenshots/db-record-after-processing.png)
 
 ### Input File
 ![Input File](screenshots/input-file.png)
