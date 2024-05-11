@@ -1,70 +1,106 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisite Setup
 
-## Available Scripts
+Before running this project, ensure you have the following prerequisites installed and set up:
 
-In the project directory, you can run:
+1. **Create an AWS Account**: If you don't have an AWS account, you can create one at [https://aws.amazon.com/](https://aws.amazon.com/). Follow the instructions provided to set up your account.
 
-### `npm start`
+2. **Configure AWS CLI**: Once you have an AWS account, install AWS CLI on your local machine if you haven't already [Refer this link to install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html). Then generate IAM User for AWS CLI with **AdministratorAccess** policy [Refer this article](https://medium.com/@sam.xzo.developing/create-aws-iam-user-02ee9c65c877).Then, configure access ID and Key to AWS CLI:
+    ```
+    aws configure
+    ```
+    Follow the prompts to enter your Access Key ID, Secret Access Key, default region `'us-east-2'`, and output format. These credentials should belong to an IAM user with administrative access created previously.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Node.js**: Install Node.js from [https://nodejs.org/](https://nodejs.org/) if you haven't already. This project requires Node.js for running scripts and managing dependencies.
 
-### `npm test`
+4. **AWS CDK**: Install AWS Cloud Development Kit (CDK) for TypeScript globally using npm by running the following command:
+    ```
+    npm install -g typescript aws-cdk
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. **Bootstrap CDK (First-Time Setup)**: If this is your first time using AWS CDK in your AWS account, you need to bootstrap your environment. Run the following command:
+    ```
+    cdk bootstrap
+    ```
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once you have set up the prerequisites, follow these steps to install and run the project:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone Repository**: Clone this repository to your local machine.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Navigate to Root Folder**: Open a command prompt or terminal and navigate to the root folder of the cloned repository.
 
-### `npm run eject`
+3. **Windows**: If you're using Windows, run the `run.bat` file located in the root folder. You can do this by double-clicking the `run.bat` file or executing it from the command prompt.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Linux/Unix**: If you're using Linux or Unix-based system, run the following commands to make the `run.sh` script executable and then execute it:
+    ```
+    chmod +x ./run.sh
+    ./run.sh
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. **Access UI**: After running the script, backend will be deployed to AWS and the UI will be accessible at [http://localhost:5173/](http://localhost:5173/). Open your web browser and navigate to this URL to access the user interface.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Cleanup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To clean up all AWS resources created by this project, follow these steps:
 
-## Learn More
+1. **Stop Frontend Dev Server**: Press `Ctrl + C` to stop the frontend development server running locally.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. **Navigate to cdk-setup Folder**: Open a command prompt or terminal and navigate to the `/cdk-setup` folder within your project directory.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. **Run CDK Destroy**: Once inside the `/cdk-setup` folder, run the following command to destroy all AWS stacks created by CDK:
+    ```
+    cdk destroy
+    ```
 
-### Code Splitting
+## About This Code Repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **cdk-setup/**: Contains code for AWS CDK stack.
+- **focus-frontend/**: TypeScript React UI developed using Vite.
+- **lambda-functions/**: Contains required Lambda functions.
+    - **create-ec2-func/**: Contains the function to create EC2 instances to process user input.
+    - **s3-presigned-url-func/**: Generates presigned URLs to upload text files.
+    - **dynamodb-func/**: Stores user input to DynamoDB.
+- **screenshots/**: Contains screenshots of the actual UI.
 
-### Analyzing the Bundle Size
+## Screenshots
+### Home Page
+![Home Page](screenshots/ui.png) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### File added to S3 bucket
+![S3 Bucket](screenshots/s3.png)
 
-### Making a Progressive Web App
+### Dyanamodb records
+![Dyanamodb](screenshots/dyanamodb.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Input File
+![Input File](screenshots/input-file.png)
 
-### Advanced Configuration
+## Processed Output File
+![Processed Output File](screenshots/processed-file.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## References
 
-### `npm run build` fails to minify
+- **AWS References**
+    - AWS SDK (Javascript v3) - https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3
+    - AWS CDK - https://docs.aws.amazon.com/cdk/api/v2/
+    - S3 Presigned URL - https://allardqjy.medium.com/using-pre-signed-urls-to-upload-files-to-amazon-s3-from-reactjs-5b15c94b66df
+    - Dyanamodb Stream - https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.Lambda.html
+    - AWS Lambda Filter - https://stackoverflow.com/questions/41112362/configure-dynamodb-stream-trigger-with-insert-only
+    - Node.js Lambda Deployment - https://docs.aws.amazon.com/lambda/latest/dg/nodejs-package.html
+    - Role vs InstanceProfile - https://medium.com/devops-dudes/the-difference-between-an-aws-role-and-an-instance-profile-ae81abd700d#:~:text=Roles%20are%20designed%20to%20be,instance%20profile%20represents%20EC2%20instances.
+    - Self Terminating Instance - https://stackoverflow.com/questions/10541363/self-terminating-aws-ec2-instance?noredirect=1&lq=1
+    - S3 Bucket deletion on CDK Destroy - https://stackoverflow.com/questions/70730645/s3-bucket-is-not-removed-by-cdk-destroy
+    - Read CDK output - https://stackoverflow.com/questions/60633269/how-to-get-cfnoutputs-of-aws-stack-to-a-file-using-aws-cdk
+    - EC2 Metadata - https://medium.com/@radhagayathripatel/retrieving-aws-ec2-instance-metadata-using-metadata-in-scripts-251bf18dbabf
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Frontend References**
+
+    - Flowbite-react - https://flowbite-react.com/docs/getting-started/introduction
+    - Vite - https://vitejs.dev/guide/
+
+

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@smithy/hash-node": "^2.2.0",
+    "@smithy/protocol-http": "^3.3.0",
+    "@smithy/url-parser": "^2.2.0",
+    "aws-sdk": "^2.1613.0",
+    "smithy": "^0.6.3"
+  }
+}

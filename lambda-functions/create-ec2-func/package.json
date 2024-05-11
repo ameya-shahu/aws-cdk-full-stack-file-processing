@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@aws-sdk/client-ec2": "^3.569.0",
+    "fs": "^0.0.1-security"
+  }
+}
